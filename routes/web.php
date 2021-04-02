@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Ag\IndexingModule;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,4 @@ Route::get('/', function () {
 
 
 
-Route::get('/ag', 'Ag/IndexingModule.php');
+Route::get('/ag', [IndexingModule::class, 'test']);
