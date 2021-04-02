@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5a6fc194-0448-4b9e-8f33-2d9576e14693" name="Yboard">
+        <fileTransfer rootFolder="/usr/home/yboard/public_html/Yboard" accessType="SFTP" host="dedivirt1999.your-server.de" port="222" sshConfigId="1601851c-825c-4564-af5a-72c98b43ec34" sshConfig="yboard@dedivirt1999.your-server.de:222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
