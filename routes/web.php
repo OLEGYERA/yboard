@@ -21,8 +21,5 @@ Route::get('/', function () {
 
 
 Route::get('/ag', [IndexingModule::class, 'test']);
-<<<<<<< HEAD
-Route::get('/ag', [\App\Http\Controllers\Ag\StockModule::class, 'renderATransport']);
+Route::get('/ag/render', [\App\Http\Controllers\Ag\StockModule::class, 'renderATransport']);
 
-=======
->>>>>>> 7889e36d19e01ad88719f9535ced1f7ed51e488d
