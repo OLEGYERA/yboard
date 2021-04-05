@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AFabricator extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title', 'rtitle', 'utitle', 'alias', 'old_val'];
 }

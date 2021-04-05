@@ -14,20 +14,6 @@ class AFabricatorSeed extends Seeder
      */
     public function run()
     {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         $titles = [
             ['title' => "Austria",'rtitle' => "Австрия",'utitle' => "Австрія",'alias' => "austria",'old_val' => 40],
             ['title' => "England",'rtitle' => "Англия",'utitle' => "Англія",'alias' => "england",'old_val' => 826],

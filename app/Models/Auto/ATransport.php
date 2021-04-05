@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ATransport extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title', 'rtitle', 'utitle', 'alias'];
 }
