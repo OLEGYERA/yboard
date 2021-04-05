@@ -16,6 +16,9 @@ class CreateAFabricatorsTable extends Migration
         Schema::create('a_fabricators', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('rtitle');
+            $table->string('utitle');
+            $table->string('alias');
             $table->integer('old_val');
             $table->timestamps();
         });

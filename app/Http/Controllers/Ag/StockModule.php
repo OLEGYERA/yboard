@@ -16,15 +16,17 @@ use App\Models\Auto\AModel;
 
 class StockModule extends Controller
 {
-    private $serviceURL = "https://auto.ria.com/";
+    private $serviceAutoURL = "https://auto.ria.com/";
     private $headers = [
         'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
     ];
 
     public function renderATransport_with_pivot(){
+        $r = generator_alias(mb_strtolower('ПРИВЕТ мир 1234'));
+        dd($r);
         foreach (ATransport::all() as $transport_item){
             $response = Http::withHeaders($this->headers)
-                ->get($this->serviceURL . 'demo/api/categories/'.$transport_item->id.'/marks/_with_country?langId=2');
+                ->get($this->serviceAutoURL . 'demo/api/categories/'.$transport_item->id.'/marks/_with_country?langId=2');
 
 
             foreach ($response->json() as $new_brand){
@@ -56,7 +58,7 @@ class StockModule extends Controller
         foreach (ABrandPivotTransport::all() as $bpt){
             $brand_obj = ABrand::find($bpt->brand_id);
             $response = Http::withHeaders($this->headers)
-                ->get($this->serviceURL . 'api/categories/'.$bpt->transport_id.'/marks/'.$brand_obj->old_val.'/models/_with_count?langId=2');
+                ->get($this->serviceAutoURL . 'api/categories/'.$bpt->transport_id.'/marks/'.$brand_obj->old_val.'/models/_with_count?langId=2');
 
             foreach ($response->json() as $new_model){
                 $new_model_obj = new AModel();
@@ -76,4 +78,6 @@ class StockModule extends Controller
         }
         return true;
     }
+
+
 }

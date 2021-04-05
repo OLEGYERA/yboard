@@ -16,6 +16,9 @@ class CreateATransportsTable extends Migration
         Schema::create('a_transports', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('rtitle');
+            $table->string('utitle');
+            $table->string('alias');
             $table->timestamps();
         });
     }
