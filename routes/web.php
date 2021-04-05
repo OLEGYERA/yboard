@@ -21,5 +21,6 @@ Route::get('/', function () {
 
 
 Route::get('/ag', [IndexingModule::class, 'test']);
-Route::get('/ag/render', [\App\Http\Controllers\Ag\StockModule::class, 'renderATransport_with_pivot']);
+Route::get('/ag/render/1', [\App\Http\Controllers\Ag\StockModule::class, 'renderATransport_with_pivot']);
+Route::get('/ag/render/2', [\App\Http\Controllers\Ag\StockModule::class, 'renderAModel_with_pivot_ATransport_with_pivot']);
 

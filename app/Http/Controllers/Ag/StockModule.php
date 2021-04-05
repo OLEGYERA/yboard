@@ -10,6 +10,8 @@ use App\Models\Auto\ATransport;
 use App\Models\Auto\AFabricator;
 use App\Models\Auto\ABrand;
 use App\Models\Auto\ABrandPivotTransport;
+use App\Models\Auto\AModel;
+
 
 
 class StockModule extends Controller
@@ -45,6 +47,31 @@ class StockModule extends Controller
                         'brand_id' => $new_brand->id,
                     ]);
                 }
+            }
+        }
+        return true;
+    }
+
+    public function renderAModel_with_pivot_ATransport_with_pivot(){
+        foreach (ABrandPivotTransport::all() as $bpt){
+            $brand_obj = ABrand::find($bpt->brand_id);
+            $response = Http::withHeaders($this->headers)
+                ->get($this->serviceURL . 'api/categories/'.$bpt->transport_id.'/marks/'.$brand_obj->old_val.'/models/_with_count?langId=2');
+
+            foreach ($response->json() as $new_model){
+                $new_model_obj = new AModel();
+                $new_model_obj->title = $new_model['name'];
+                $new_model_obj->old_val = $new_model['value'];
+                $new_model_obj->brand_pivot_transport_id = $bpt->id;
+                if($new_model['parentId'] != 0){
+                    $parent_model_obj = AModel::where('old_val', $new_model['parentId'])->first();
+                    $new_model_obj->parent_id = $parent_model_obj->id;
+                }
+                $new_model_obj->hasChild = $new_model['isGroup'];
+
+
+                $new_model_obj->save();
+                echo $new_model['name'] . '<br/>';
             }
         }
         return true;

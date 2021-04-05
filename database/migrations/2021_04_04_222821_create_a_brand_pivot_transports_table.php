@@ -16,10 +16,10 @@ class CreateABrandPivotTransportsTable extends Migration
         Schema::create('a_brand_pivot_transports', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('transport_id')->unsigned()->nullable();
+            $table->bigInteger('transport_id')->unsigned();
             $table->foreign('transport_id')->references('id')->on('a_transports');
 
-            $table->bigInteger('brand_id')->unsigned()->nullable();
+            $table->bigInteger('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('a_brands');
 
             $table->timestamps();
