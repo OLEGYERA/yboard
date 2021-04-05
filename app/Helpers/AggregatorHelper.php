@@ -25,7 +25,7 @@ function generator_alias($string){
         'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Sch',
         'Ь' => '\'',  'Ы' => 'Y',   'Ъ' => '\'',
         'Э' => 'E',   'Ю' => 'Yu',  'Я' => 'Ya',
-        ' ' => '-', '/' => '-',
+        ' ' => '_', '/' => '-',
     );
     return strtr($string, $converter);
 }

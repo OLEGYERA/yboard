@@ -21,9 +21,13 @@ class StockModule extends Controller
         'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36',
     ];
 
-    public function renderATransport_with_pivot(){
-        $r = generator_alias(mb_strtolower('ПРИВЕТ мир 1234'));
-        dd($r);
+    public function renderAutoBasicData(){
+        $this->renderATransport_with_pivot();
+        $this->renderAModel_with_pivot_ATransport_with_pivot();
+        return true;
+    }
+
+    protected function renderATransport_with_pivot(){
         foreach (ATransport::all() as $transport_item){
             $response = Http::withHeaders($this->headers)
                 ->get($this->serviceAutoURL . 'demo/api/categories/'.$transport_item->id.'/marks/_with_country?langId=2');
@@ -38,8 +42,10 @@ class StockModule extends Controller
                     ]);
                 } else{
                     $fabricator_id = AFabricator::where('old_val', $new_brand['country'])->first();
+                    $brand_Is_set_how_alias = ABrand::where('alias', generator_alias(mb_strtolower($new_brand['name'])))->first();
                     $new_brand = (new ABrand)->create([
                         'title' => $new_brand['name'],
+                        'alias' => generator_alias(mb_strtolower($new_brand['name'])) . ($brand_Is_set_how_alias ? '-1' : ''),
                         'old_val' => $new_brand['value'],
                         'fabricator_id' => $fabricator_id ? $fabricator_id->id : null
                     ]);
@@ -54,7 +60,7 @@ class StockModule extends Controller
         return true;
     }
 
-    public function renderAModel_with_pivot_ATransport_with_pivot(){
+    protected function renderAModel_with_pivot_ATransport_with_pivot(){
         foreach (ABrandPivotTransport::all() as $bpt){
             $brand_obj = ABrand::find($bpt->brand_id);
             $response = Http::withHeaders($this->headers)
@@ -63,6 +69,7 @@ class StockModule extends Controller
             foreach ($response->json() as $new_model){
                 $new_model_obj = new AModel();
                 $new_model_obj->title = $new_model['name'];
+                $new_model_obj->alias = generator_alias(mb_strtolower($new_model['name']));
                 $new_model_obj->old_val = $new_model['value'];
                 $new_model_obj->brand_pivot_transport_id = $bpt->id;
                 if($new_model['parentId'] != 0){
@@ -71,9 +78,7 @@ class StockModule extends Controller
                 }
                 $new_model_obj->hasChild = $new_model['isGroup'];
 
-
                 $new_model_obj->save();
-                echo $new_model['name'] . '<br/>';
             }
         }
         return true;

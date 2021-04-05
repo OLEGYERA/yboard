@@ -16,8 +16,8 @@ class CreateAModelsTable extends Migration
         Schema::create('a_models', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('alias');
             $table->integer('old_val');
-
 
             $table->bigInteger('brand_pivot_transport_id')->unsigned();
             $table->foreign('brand_pivot_transport_id')->references('id')->on('a_models');

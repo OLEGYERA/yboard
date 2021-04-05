@@ -9,5 +9,5 @@ class ABrand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'old_val', 'fabricator_id'];
+    protected $fillable = ['title', 'alias', 'old_val', 'fabricator_id'];
 }

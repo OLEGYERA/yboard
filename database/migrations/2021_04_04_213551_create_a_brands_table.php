@@ -16,6 +16,7 @@ class CreateABrandsTable extends Migration
         Schema::create('a_brands', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('alias')->unique();
             $table->integer('old_val');
             $table->bigInteger('fabricator_id')->unsigned()->nullable();
             $table->foreign('fabricator_id')->references('id')->on('a_fabricators');
